@@ -33,5 +33,9 @@ namespace OneIdentityApi.Services
             return _users.Find<User>(emp => emp.id == id).FirstOrDefault();
         }
 
+        public object AddEmployee(User user)
+        {
+            
+        }
     }
 }
