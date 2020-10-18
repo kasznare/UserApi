@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Driver;
+using OneIdentityApi.Models;
 using OneIdentityApi.Services;
 
 namespace OneIdentityApi
@@ -34,6 +37,13 @@ namespace OneIdentityApi
                 sp.GetRequiredService<IOptions<UserDatabaseSettings>>().Value);
 
             services.AddSingleton<UserService>();
+
+
+            services.AddTransient<ArticleService>();
+            ConventionRegistry.Register("Camel Case", new ConventionPack { new CamelCaseElementNameConvention() }, _ => true);
+            services.AddSingleton<IMongoClient>(s => new MongoClient(Configuration.GetConnectionString("MongoDb")));
+            services.AddScoped(s => new AppDbContext(s.GetRequiredService<IMongoClient>(), Configuration["DbName"]));
+
 
             services.AddControllers();
         }

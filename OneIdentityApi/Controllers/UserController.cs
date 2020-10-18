@@ -45,22 +45,22 @@ namespace OneIdentityApi.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public IActionResult Post([FromBody] string user)
+        public async Task<IActionResult> Post([FromBody] User user)
         {
-            if (user == null)
-                return BadRequest();
+            //if (user == null)
+            //    return BadRequest();
 
-            if (user.FirstName == string.Empty || user.LastName == string.Empty)
-            {
-                ModelState.AddModelError("Name/FirstName", "The name or first name shouldn't be empty");
-            }
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            //if (!ModelState.IsValid)
+            //    return BadRequest(ModelState);
 
-            var createdEmployee = _userRepository.AddEmployee(user);
+            //var createdEmployee = _userService.AddEmployee(user);
 
-            return Created("user", createdEmployee);
+            //return Created("user", createdEmployee);
+
+            await _userService.AddUserAsync(user);
+
+            return user.id != null ? (IActionResult)Ok(user.id) : BadRequest();
         }
 
         // PUT api/<UserController>/5
