@@ -27,11 +27,8 @@ namespace OneIdentityApi.Services
         {
             await _db.Users.InsertOneAsync(user);
         }
-
-
         public async void UpdateUser(User user)
         {
-            //var foundEmployee = _db.Users.FirstOrDefault(e => e.EmployeeId == user.EmployeeId);
             var filter = Builders<User>.Filter.Eq("id", user.id);
 
             var update = Builders<User>.Update.Set("name",user.name)
@@ -45,43 +42,12 @@ namespace OneIdentityApi.Services
             await _db.Users.UpdateOneAsync(filter, update);
         }
 
-
-
-
         public async void DeleteUser(int userId)
         {
             var deletefilter = Builders<User>.Filter.Eq("id", userId);
-            //var foundEmployee = _db.Users.Find(e => e.id == userId);
-
             await _db.Users.DeleteOneAsync(deletefilter);
         }
 
-        //private readonly IMongoCollection<User> _users;
-        //public UserService(IUserDatabaseSettings settings)
-        //{
-        //    //var client = new MongoClient(settings.ConnectionString);
-
-        //    var client = new MongoClient("mongodb+srv://admin:79aeWlXTYUDjTHrL@cluster0.paiv8.azure.mongodb.net/<Users>?retryWrites=true&w=majority");
-        //    var database = client.GetDatabase(settings.DatabaseName);
-
-        //    _users = database.GetCollection<User>(settings.UsersCollectionName);
-
-        //}
-
-        //public List<User> GetAllUsers()
-        //{
-        //    List<User> users;
-        //    users = _users.Find(emp => true).ToList();
-        //    return users;
-        //}
-
-        //public User GetUserById(string id)
-        //{
-        //    return _users.Find<User>(emp => emp.id == id).FirstOrDefault();
-        //}
-
-
-
-
+       
     }
 }
