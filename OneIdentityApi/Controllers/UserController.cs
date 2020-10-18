@@ -51,6 +51,7 @@ namespace OneIdentityApi.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _userService.DeleteEmployee(id);
         }
     }
 }

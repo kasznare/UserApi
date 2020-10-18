@@ -37,7 +37,13 @@ namespace OneIdentityApi
             //    sp.GetRequiredService<IOptions<UserDatabaseSettings>>().Value);
 
             //services.AddSingleton<UserService>();
+            services.Configure<UserDatabaseSettings>(
+                Configuration.GetSection(nameof(UserDatabaseSettings)));
 
+            services.AddSingleton<IUserDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<UserDatabaseSettings>>().Value);
+
+            services.AddSingleton<EmployeeService>();
 
             services.AddTransient<UserService>();
             ConventionRegistry.Register("Camel Case", new ConventionPack { new CamelCaseElementNameConvention() }, _ => true);

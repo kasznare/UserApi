@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using OneIdentityApi.Models;
 
@@ -27,6 +28,14 @@ namespace OneIdentityApi.Services
             await _db.Users.InsertOneAsync(user);
         }
 
+
+        public async void DeleteEmployee(int userId)
+        {
+            var deletefilter = Builders<User>.Filter.Eq("id", userId);
+            //var foundEmployee = _db.Users.Find(e => e.id == userId);
+
+            await _db.Users.DeleteOneAsync(deletefilter);
+        }
 
         //private readonly IMongoCollection<User> _users;
         //public UserService(IUserDatabaseSettings settings)
