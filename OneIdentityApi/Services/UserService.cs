@@ -21,7 +21,7 @@ namespace OneIdentityApi.Services
         }
         public async Task<List<User>> GetUsersAsync()
         {
-            return await _db.Users.Find(a =>true).ToListAsync();
+            return await _db.Users.Find(a => true).ToListAsync();
         }
         public async Task AddUserAsync(User user)
         {
@@ -29,7 +29,26 @@ namespace OneIdentityApi.Services
         }
 
 
-        public async void DeleteEmployee(int userId)
+        public async void UpdateEmployee(User employee)
+        {
+            //var foundEmployee = _db.Users.FirstOrDefault(e => e.EmployeeId == employee.EmployeeId);
+            var filter = Builders<User>.Filter.Eq("id", employee.id);
+
+            var update = Builders<User>.Update.Set("name",employee.name)
+                .Set("username",employee.username)
+                .Set("email",employee.email)
+                .Set("address",employee.address)
+                .Set("phone",employee.phone)
+                .Set("website",employee.website)
+                .Set("company",employee.company);
+
+            await _db.Users.UpdateOneAsync(filter, update);
+        }
+
+
+
+
+        public async void DeleteUser(int userId)
         {
             var deletefilter = Builders<User>.Filter.Eq("id", userId);
             //var foundEmployee = _db.Users.Find(e => e.id == userId);
