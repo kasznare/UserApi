@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OneIdentityApi.Models;
 using OneIdentityApi.Services;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OneIdentityApi.Controllers
 {
@@ -14,7 +10,6 @@ namespace OneIdentityApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-
         private readonly UserService _userService;
 
         public UserController(UserService userService)
@@ -24,40 +19,23 @@ namespace OneIdentityApi.Controllers
 
         // GET: api/<UserController>
         [HttpGet]
-        public List<User> GetAllUsers()
+        public Task<List<User>> GetAllUsers()
         {
-            return _userService.GetAllUsers();
+            return _userService.GetUsersAsync();
         }
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public ActionResult<User> GetUserById(string id)
+        public async Task<User> GetUserById(string id)
         {
-            var emp = _userService.GetUserById(id);
-
-            if (emp == null)
-            {
-                return NotFound();
-            }
-
-            return emp;
+            return await _userService.GetUserByIdAsync(id);
         }
 
         // POST api/<UserController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] User user)
         {
-            //if (user == null)
-            //    return BadRequest();
-
-
-            //if (!ModelState.IsValid)
-            //    return BadRequest(ModelState);
-
-            //var createdEmployee = _userService.AddEmployee(user);
-
-            //return Created("user", createdEmployee);
-
+            //if (!ModelState.IsValid) return BadRequest(ModelState); //validation for later
             await _userService.AddUserAsync(user);
 
             return user.id != null ? (IActionResult)Ok(user.id) : BadRequest();
