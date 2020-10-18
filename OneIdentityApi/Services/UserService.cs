@@ -29,18 +29,18 @@ namespace OneIdentityApi.Services
         }
 
 
-        public async void UpdateEmployee(User employee)
+        public async void UpdateUser(User user)
         {
-            //var foundEmployee = _db.Users.FirstOrDefault(e => e.EmployeeId == employee.EmployeeId);
-            var filter = Builders<User>.Filter.Eq("id", employee.id);
+            //var foundEmployee = _db.Users.FirstOrDefault(e => e.EmployeeId == user.EmployeeId);
+            var filter = Builders<User>.Filter.Eq("id", user.id);
 
-            var update = Builders<User>.Update.Set("name",employee.name)
-                .Set("username",employee.username)
-                .Set("email",employee.email)
-                .Set("address",employee.address)
-                .Set("phone",employee.phone)
-                .Set("website",employee.website)
-                .Set("company",employee.company);
+            var update = Builders<User>.Update.Set("name",user.name)
+                .Set("username",user.username)
+                .Set("email",user.email)
+                .Set("address",user.address)
+                .Set("phone",user.phone)
+                .Set("website",user.website)
+                .Set("company",user.company);
 
             await _db.Users.UpdateOneAsync(filter, update);
         }

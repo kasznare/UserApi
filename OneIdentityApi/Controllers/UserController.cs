@@ -33,7 +33,7 @@ namespace OneIdentityApi.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] User user)
+        public async Task<IActionResult> CreateUser([FromBody] User user)
         {
             //if (!ModelState.IsValid) return BadRequest(ModelState); //validation for later
             await _userService.AddUserAsync(user);
@@ -43,15 +43,16 @@ namespace OneIdentityApi.Controllers
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void UpdateUser(int id, [FromBody] User value)
         {
+            _userService.UpdateUser(value);
         }
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _userService.DeleteEmployee(id);
+            _userService.DeleteUser(id);
         }
     }
 }
