@@ -30,19 +30,19 @@ namespace OneIdentityApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<UserDatabaseSettings>(
-                Configuration.GetSection(nameof(UserDatabaseSettings)));
+            //services.Configure<UserDatabaseSettings>(
+            //    Configuration.GetSection(nameof(UserDatabaseSettings)));
 
-            services.AddSingleton<IUserDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<UserDatabaseSettings>>().Value);
+            //services.AddSingleton<IUserDatabaseSettings>(sp =>
+            //    sp.GetRequiredService<IOptions<UserDatabaseSettings>>().Value);
 
-            services.AddSingleton<UserService>();
+            //services.AddSingleton<UserService>();
 
 
             services.AddTransient<UserService>();
             ConventionRegistry.Register("Camel Case", new ConventionPack { new CamelCaseElementNameConvention() }, _ => true);
             services.AddSingleton<IMongoClient>(s => new MongoClient(Configuration.GetConnectionString("MongoDb")));
-            services.AddScoped(s => new AppDbContext(s.GetRequiredService<IMongoClient>(), Configuration["DbName"]));
+            services.AddScoped(s => new AppDbContext(s.GetRequiredService<IMongoClient>(), Configuration["Users"]));
 
 
             services.AddControllers();
