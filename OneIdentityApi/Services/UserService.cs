@@ -16,7 +16,7 @@ namespace OneIdentityApi.Services
         }
         public async Task<User> GetUserByIdAsync(string id)
         {
-            return await _db.Users.Find(a => a.id == id).SingleOrDefaultAsync();
+            return await _db.Users.Find(a => a.id == int.Parse(id)).SingleOrDefaultAsync();
         }
         public async Task<List<User>> GetUsersAsync()
         {

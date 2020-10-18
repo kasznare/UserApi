@@ -42,7 +42,12 @@ namespace OneIdentityApi
             services.AddTransient<UserService>();
             ConventionRegistry.Register("Camel Case", new ConventionPack { new CamelCaseElementNameConvention() }, _ => true);
             services.AddSingleton<IMongoClient>(s => new MongoClient(Configuration.GetConnectionString("MongoDb")));
-            services.AddScoped(s => new AppDbContext(s.GetRequiredService<IMongoClient>(), Configuration["Users"]));
+            services.AddScoped(s => new AppDbContext(s.GetRequiredService<IMongoClient>(), Configuration["DbName"]));
+
+
+            ////ConventionRegistry.Register("Camel Case", new ConventionPack { new CamelCaseElementNameConvention() }, _ => true);
+            //services.AddSingleton<IMongoClient>(s => new MongoClient(Configuration.GetConnectionString("MongoDb")));
+            //services.AddScoped(s => new AppDbContext(s.GetRequiredService<IMongoClient>(), Configuration["DbName"]));
 
 
             services.AddControllers();
