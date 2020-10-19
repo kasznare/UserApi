@@ -45,14 +45,14 @@ namespace OneIdentityApi.Controllers
         [HttpPut("{id}")]
         public void UpdateUser(int id, [FromBody] User value)
         {
-            _userService.UpdateUser(value);
+            _userService.UpdateUserAsync(value);
         }
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _userService.DeleteUser(id);
+            _userService.DeleteUserAsync(id);
         }
     }
 }

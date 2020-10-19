@@ -8,7 +8,7 @@ using OneIdentityApi.Models;
 
 namespace OneIdentityApi.Services
 {
-    public class UserService
+    public class UserService:IUserService
     {
         private readonly AppDbContext _db;
         public UserService(AppDbContext db)
@@ -27,7 +27,7 @@ namespace OneIdentityApi.Services
         {
             await _db.Users.InsertOneAsync(user);
         }
-        public async void UpdateUser(User user)
+        public async void UpdateUserAsync(User user)
         {
             var filter = Builders<User>.Filter.Eq("id", user.id);
 
@@ -42,12 +42,10 @@ namespace OneIdentityApi.Services
             await _db.Users.UpdateOneAsync(filter, update);
         }
 
-        public async void DeleteUser(int userId)
+        public async void DeleteUserAsync(int userId)
         {
             var deletefilter = Builders<User>.Filter.Eq("id", userId);
             await _db.Users.DeleteOneAsync(deletefilter);
         }
-
-       
     }
 }

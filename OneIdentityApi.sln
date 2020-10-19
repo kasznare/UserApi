@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneIdentityApi", "OneIdentityApi\OneIdentityApi.csproj", "{2F4BA5DD-0F03-4C32-8E9D-A31F16BCABB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneIdentityApi", "OneIdentityApi\OneIdentityApi.csproj", "{2F4BA5DD-0F03-4C32-8E9D-A31F16BCABB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Tests", "Api.Tests\Api.Tests.csproj", "{C6B7BB30-BE7D-4A65-B20A-888F8529F02B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2F4BA5DD-0F03-4C32-8E9D-A31F16BCABB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F4BA5DD-0F03-4C32-8E9D-A31F16BCABB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F4BA5DD-0F03-4C32-8E9D-A31F16BCABB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6B7BB30-BE7D-4A65-B20A-888F8529F02B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6B7BB30-BE7D-4A65-B20A-888F8529F02B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6B7BB30-BE7D-4A65-B20A-888F8529F02B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6B7BB30-BE7D-4A65-B20A-888F8529F02B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
